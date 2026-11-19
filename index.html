@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>First-Year Engineering Glossary</title>
+<style>
+:root{
+  --bg:#f6f7f9;--card:#fff;--ink:#1b1f27;--muted:#5d6678;--line:#e1e5ec;
+  --ele:#2563eb;--ele-bg:#e6eeff;--mec:#c2410c;--mec-bg:#ffeddf;
+  --accent:#1f3a6e;--mark:#fff1a8;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#12151b;--card:#1b2029;--ink:#e8ebf1;--muted:#9aa4b6;--line:#2b3340;
+  --ele:#7aa5ff;--ele-bg:#1c2b4d;--mec:#ffa468;--mec-bg:#3d2616;--accent:#9db8f5;--mark:#5a4b00}
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{padding:22px 16px 8px;max-width:1100px;margin:0 auto}
+h1{margin:0;font-size:1.6rem;letter-spacing:-.01em}
+.sub{color:var(--muted);margin-top:2px}
+.wrap{max-width:1100px;margin:0 auto;padding:0 16px 40px}
+.toolbar{position:sticky;top:0;z-index:5;background:var(--bg);padding:10px 0 8px;border-bottom:1px solid var(--line)}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px}
+input[type=search],select,input[type=text],textarea{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+input[type=search]{flex:1 1 240px;min-width:0}
+button{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:7px 12px;cursor:pointer}
+button:hover{border-color:var(--accent)}
+button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+@media (prefers-color-scheme:dark){button.primary{color:#0e1320}}
+.tabs button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+@media (prefers-color-scheme:dark){.tabs button.on{color:#0e1320}}
+.chips button{border-radius:999px;padding:3px 11px;font-size:.85rem}
+.chips button.on{background:var(--ele-bg);border-color:var(--accent)}
+.letters button{padding:2px 7px;font-size:.8rem;min-width:28px}
+.letters button.on{background:var(--accent);color:#fff}
+.letters button:disabled{opacity:.35;cursor:default}
+label.chk{display:flex;gap:6px;align-items:center;color:var(--muted);font-size:.9rem}
+.stats{color:var(--muted);font-size:.88rem;margin:10px 0 4px}
+h2.grp{margin:20px 0 8px;font-size:1.05rem;color:var(--accent);border-bottom:2px solid var(--line);padding-bottom:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:10px}
+.card{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--ele);border-radius:10px;padding:10px 12px}
+.card[data-s="Applied Mechanics"]{border-left-color:var(--mec)}
+.card h3{margin:0 0 4px;font-size:1rem}
+.badges{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:5px}
+.b{font-size:.7rem;padding:1px 8px;border-radius:999px;background:var(--ele-bg);color:var(--ele);font-weight:600}
+.card[data-s="Applied Mechanics"] .b.s{background:var(--mec-bg);color:var(--mec)}
+.b.t{background:var(--line);color:var(--muted)}
+.b.c{background:#e6f6ea;color:#17703a}
+.card p{margin:0}
+.card.study{cursor:pointer}
+.card.study:not(.open) p.def{filter:blur(6px);user-select:none}
+.card.study:not(.open)::after{content:"tap to reveal";display:block;font-size:.75rem;color:var(--muted);margin-top:4px}
+.act{margin-top:6px;display:flex;gap:6px}
+.act button{padding:2px 8px;font-size:.78rem}
+mark{background:var(--mark);color:inherit;border-radius:2px}
+.empty{padding:30px;text-align:center;color:var(--muted)}
+dialog{border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);width:min(520px,94vw);padding:18px}
+dialog::backdrop{background:rgba(0,0,0,.45)}
+dialog label{display:block;margin-top:10px;font-size:.85rem;color:var(--muted)}
+dialog input,dialog select,dialog textarea{width:100%;margin-top:3px}
+.err{color:#c0262d;font-size:.85rem;min-height:1.2em;margin-top:6px}
+.cnt{font-size:.75rem;color:var(--muted);text-align:right}
+#toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--accent);color:#fff;padding:8px 16px;border-radius:8px;opacity:0;transition:opacity .2s;pointer-events:none}
+@media (prefers-color-scheme:dark){#toast{color:#0e1320}}
+#toast.show{opacity:1}
+footer{color:var(--muted);font-size:.8rem;margin-top:30px}
+@media print{
+  .toolbar,.act,footer,#toast{display:none!important}
+  body{background:#fff;color:#000}
+  .card{break-inside:avoid;border-color:#bbb}
+  .card.study:not(.open) p.def{filter:none!important}
+  .card.study::after{display:none!important}
+  .grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Glossary for Shashank | Prof. Rahul M. Samant</h1>
+  <div class="sub">Basic Electronics &middot; Applied Mechanics &mdash; concept + two-line explanation</div>
+</header>
+<div class="wrap">
+  <div class="toolbar">
+    <div class="row">
+      <input type="search" id="q" placeholder="Search concept or explanation  (press / to focus)" aria-label="Search">
+      <select id="sort" aria-label="Sort">
+        <option value="az">Sort: A–Z</option>
+        <option value="topic">Sort: By topic</option>
+      </select>
+      <label class="chk"><input type="checkbox" id="study"> Study mode</label>
+    </div>
+    <div class="row tabs" id="tabs"></div>
+    <div class="row chips" id="topics"></div>
+    <div class="row letters" id="letters"></div>
+    <div class="row">
+      <button class="primary" id="add">+ Add concept</button>
+      <button id="expJson">Export JSON</button>
+      <button id="expCsv">Export CSV</button>
+      <button id="imp">Import JSON</button>
+      <button id="prn">Print</button>
+      <input type="file" id="file" accept="application/json,.json" hidden>
+    </div>
+  </div>
+  <div class="stats" id="stats"></div>
+  <main id="list"></main>
+  <footer>Custom entries you add are stored in this browser only (localStorage). Use Export JSON to back up or share them; Import JSON to load them elsewhere.</footer>
+</div>
+
+<dialog id="dlg">
+  <form method="dialog" id="form" novalidate>
+    <h3 id="dlgTitle" style="margin:0">Add concept</h3>
+    <label>Subject
+      <select id="fSubject"></select>
+    </label>
+    <label>Topic
+      <input type="text" id="fTopic" list="topicList" placeholder="e.g. Diodes">
+      <datalist id="topicList"></datalist>
+    </label>
+    <label>Concept
+      <input type="text" id="fTerm" maxlength="80">
+    </label>
+    <label>Explanation (aim for two lines, ≤ 260 characters)
+      <textarea id="fDef" rows="4" maxlength="260"></textarea>
+    </label>
+    <div class="cnt"><span id="cnt">0</span>/260</div>
+    <div class="err" id="err"></div>
+    <div class="row" style="justify-content:flex-end;margin:6px 0 0">
+      <button type="button" id="cancel">Cancel</button>
+      <button type="submit" class="primary" id="save">Save</button>
+    </div>
+  </form>
+</dialog>
+<div id="toast"></div>
+
+<script>
+/* ---------- DATA: [topic, [[concept, explanation], ...]] ---------- */
+const DATA = {
+"Basic Electronics": [
+["Circuit Fundamentals",[
+["Electric Charge","Fundamental property of matter that experiences force in an electric field, measured in coulombs (C). An electron carries −1.6×10⁻¹⁹ C."],
+["Electric Current","Rate of flow of charge, I = dQ/dt, measured in amperes (A). Conventional current flows from positive to negative, opposite to electron flow."],
+["Voltage (Potential Difference)","Work done per unit charge in moving it between two points, measured in volts (V). It is the 'push' that drives current through a circuit."],
+["Resistance","Opposition a material offers to current flow, measured in ohms (Ω). For a conductor, R = ρl/A."],
+["Resistivity","Intrinsic property of a material that sets its resistance for a given length and area (Ω·m). Conductors have low resistivity; insulators have very high resistivity."],
+["Conductance","Reciprocal of resistance (G = 1/R), measured in siemens (S). Higher conductance means current flows more easily."],
+["Ohm's Law","At constant temperature, current through a conductor is proportional to the voltage across it (V = IR). It does not hold for non-ohmic devices such as diodes."],
+["Electric Power","Rate at which electrical energy is converted or consumed, P = VI = I²R = V²/R, in watts (W). One watt equals one joule per second."],
+["Electrical Energy","Total work done by a source over time, E = P × t, in joules or kilowatt-hours (kWh). One kWh, the 'unit' on an electricity bill, equals 3.6 MJ."],
+["Kirchhoff's Current Law (KCL)","Algebraic sum of currents meeting at a node is zero. It expresses conservation of charge."],
+["Kirchhoff's Voltage Law (KVL)","Algebraic sum of voltages around any closed loop is zero. It expresses conservation of energy."],
+["Node, Branch and Loop","A node is a junction of two or more elements; a branch is a single element between nodes. A loop is any closed path through the circuit."],
+["Series Circuit","Elements connected end to end so that the same current flows through all. Total resistance is the sum, R = R₁ + R₂ + …"],
+["Parallel Circuit","Elements connected across the same two nodes, so all share the same voltage. The reciprocal of total resistance is the sum of reciprocals."],
+["Voltage Divider","Series resistors that split a source voltage in proportion to their resistances: Vout = Vin·R₂/(R₁+R₂). Used to bias circuits and scale sensor signals."],
+["Current Divider","Parallel branches share a total current in inverse proportion to their resistances. The lowest-resistance branch carries the largest current."],
+["Ideal Voltage Source","Supplies a fixed voltage regardless of load current; its internal resistance is zero. A practical source has a small series resistance."],
+["Ideal Current Source","Supplies a fixed current regardless of load voltage; its internal resistance is infinite. A practical source has a large parallel resistance."],
+["Ground (Reference Node)","Node chosen as the zero-volt reference against which other voltages are measured. It also provides a common return path in practical circuits."]
+]],
+["Network Analysis & Theorems",[
+["Mesh Analysis","Applies KVL to independent loops to find unknown loop currents. Best suited to planar circuits with few meshes."],
+["Nodal Analysis","Applies KCL at nodes to find unknown node voltages relative to a reference. Efficient when a circuit has fewer nodes than meshes."],
+["Superposition Theorem","In a linear circuit with several sources, the response is the sum of the responses due to each source acting alone. Other voltage sources are shorted and current sources opened."],
+["Thevenin's Theorem","Any linear two-terminal network can be replaced by a voltage source V_th in series with a resistance R_th. It simplifies finding the current in a single load."],
+["Norton's Theorem","Any linear two-terminal network can be replaced by a current source I_N in parallel with a resistance R_N. It is the dual of Thevenin's theorem."],
+["Maximum Power Transfer Theorem","A load receives maximum power when its resistance equals the source's internal resistance. Efficiency at this condition is only 50%."],
+["Star–Delta Transformation","Converts a three-terminal resistor network between Y and Δ forms without changing external behaviour. Used to reduce bridge circuits that are neither series nor parallel."]
+]],
+["AC Fundamentals",[
+["Alternating Current (AC)","Current that periodically reverses direction, usually varying sinusoidally with time. Mains supply in India is 230 V, 50 Hz."],
+["Frequency and Time Period","Frequency f is the number of cycles per second (Hz); time period T = 1/f. Angular frequency is ω = 2πf."],
+["Peak (Amplitude) Value","Maximum instantaneous value of an alternating quantity in either direction. For a sinusoid, V_m = √2 × V_rms."],
+["RMS Value","Effective value of an AC quantity that produces the same heating as an equal DC value. For a sine wave, V_rms = V_m/√2 ≈ 0.707 V_m."],
+["Average Value","Mean value of a waveform over a half cycle, since a symmetric AC waveform averages to zero over a full cycle. For a sine wave, V_avg = 2V_m/π ≈ 0.637 V_m."],
+["Form Factor and Peak Factor","Form factor = RMS/average (1.11 for a sine wave); peak factor = peak/RMS (1.414 for a sine wave). Both describe the shape of a waveform."],
+["Phase and Phase Difference","Phase is the angular position of a waveform within its cycle; phase difference is the angular shift between two waveforms of the same frequency. The leading wave reaches its peak first."],
+["Phasor","A rotating vector representing the magnitude and phase of a sinusoid. It turns time-domain differential problems into simple complex algebra."],
+["Inductive and Capacitive Reactance","Opposition of an inductor (X_L = ωL) and a capacitor (X_C = 1/ωC) to AC, in ohms. X_L rises with frequency while X_C falls."],
+["Impedance","Total opposition to AC current, combining resistance and reactance: Z = R + jX, in ohms. Its magnitude is √(R² + X²)."],
+["Power Factor","Cosine of the phase angle between voltage and current, cos φ. It is the fraction of apparent power that does real work."],
+["Real, Reactive and Apparent Power","Real power P (W) does useful work, reactive power Q (VAR) shuttles in the fields, and apparent power S (VA) is their vector sum. S² = P² + Q²."],
+["Resonance","Condition in an RLC circuit where X_L = X_C, so the circuit behaves as a pure resistance. Resonant frequency is f₀ = 1/(2π√LC)."],
+["Quality Factor (Q)","Measure of the sharpness of resonance: Q = f₀/bandwidth, or X_L/R in a series RLC circuit. Higher Q means better selectivity."]
+]],
+["Passive Components",[
+["Resistor","Two-terminal component that opposes current and dissipates power as heat. Used to limit current, divide voltage and set bias."],
+["Resistor Colour Code","Coloured bands encode a resistor's value, multiplier and tolerance. Reading starts from the band nearest to one end."],
+["Capacitor","Stores energy in an electric field between two plates separated by a dielectric. It blocks DC and passes AC."],
+["Capacitance","Ability to store charge per unit voltage, C = Q/V, measured in farads (F). Energy stored is ½CV²."],
+["Inductor","Coil that stores energy in a magnetic field when current flows through it. It opposes sudden changes in current."],
+["Inductance","Property of a coil relating induced emf to the rate of change of current, measured in henries (H). Energy stored is ½LI²."],
+["Transformer","Static device that transfers AC power between circuits by mutual induction, changing voltage and current levels. The turns ratio gives V₁/V₂ = N₁/N₂."],
+["Time Constant","Time for an RC or RL circuit's response to reach about 63.2% of its final value; τ = RC or L/R. After about 5τ the transient is practically over."]
+]],
+["Semiconductor Physics",[
+["Semiconductor","Material whose conductivity lies between conductors and insulators, e.g., silicon and germanium. Conductivity rises with temperature and doping."],
+["Energy Band","Range of allowed electron energies in a solid: valence band and conduction band, separated by a forbidden gap. The gap is about 1.1 eV for Si and 0.67 eV for Ge."],
+["Intrinsic Semiconductor","Pure semiconductor with equal numbers of electrons and holes. Its conductivity is low and strongly temperature dependent."],
+["Doping and Extrinsic Semiconductor","Deliberate addition of impurity atoms to a pure semiconductor to raise its conductivity. The doped material is called extrinsic."],
+["n-type Semiconductor","Doped with pentavalent atoms (P, As) that donate free electrons. Electrons are the majority carriers."],
+["p-type Semiconductor","Doped with trivalent atoms (B, Ga) that create holes. Holes are the majority carriers."],
+["Hole","Vacancy left by a missing electron in the valence band, behaving as a positive charge carrier. It moves opposite to electron motion."],
+["Majority and Minority Carriers","Majority carriers dominate conduction in a doped semiconductor; minority carriers are the few of the opposite type. Minority carriers cause the reverse leakage current."],
+["Drift and Diffusion Current","Drift is carrier motion caused by an electric field; diffusion is motion from high to low concentration. Both exist at a PN junction."]
+]],
+["Diodes & Rectifiers",[
+["PN Junction","Boundary formed by joining p-type and n-type semiconductors. It is the building block of diodes and transistors."],
+["Depletion Region","Zone near a PN junction that is depleted of free carriers and contains fixed ions. It acts as an insulating barrier whose width changes with bias."],
+["Barrier Potential","Built-in potential across the depletion region that opposes carrier diffusion. About 0.7 V for silicon and 0.3 V for germanium."],
+["Forward Bias","Positive terminal to the p-side: the barrier narrows and current flows once the voltage exceeds the knee (cut-in) voltage. The diode then acts almost like a closed switch."],
+["Reverse Bias","Positive terminal to the n-side: the barrier widens and only a tiny leakage current flows. The diode then acts almost like an open switch."],
+["Diode V–I Characteristic","Graph of diode current against voltage: exponential rise in forward bias, negligible current in reverse bias until breakdown. Shockley equation: I = I_s(e^(V/ηV_T) − 1)."],
+["Breakdown (Avalanche and Zener)","Sudden large reverse current beyond a critical reverse voltage. Avalanche arises from impact ionisation; Zener breakdown from field emission in heavily doped junctions."],
+["Zener Diode","Diode designed to operate in reverse breakdown with nearly constant voltage. Widely used as a simple shunt voltage regulator."],
+["Light Emitting Diode (LED)","Diode that emits light when forward biased, due to electron–hole recombination. Needs a series resistor to limit current."],
+["Photodiode","Reverse-biased diode whose reverse current increases with incident light. Used in light sensors and optical receivers."],
+["Solar Cell","Large-area PN junction that converts light directly into electrical energy (photovoltaic effect). It operates without external bias."],
+["Rectifier","Circuit that converts AC into pulsating DC using diodes. Types: half-wave, full-wave centre-tapped and bridge."],
+["Half-Wave Rectifier","A single diode conducts in only one half-cycle, so the load receives current for 50% of the time. Maximum efficiency is 40.6% and ripple factor 1.21."],
+["Full-Wave (Bridge) Rectifier","Four diodes conduct in pairs so both half-cycles reach the load. Efficiency is 81.2% and ripple factor 0.48."],
+["Ripple Factor","Ratio of the AC component to the DC component in rectifier output, γ = V_r(rms)/V_dc. Lower values indicate smoother DC."],
+["Filter","Circuit (usually a capacitor or LC network) that smooths rectified output by reducing ripple. A larger capacitor gives lower ripple."],
+["Clipper and Clamper","A clipper cuts off part of a waveform above or below a reference level; a clamper shifts its DC level without changing its shape. Both use diodes with resistors, capacitors or sources."],
+["Voltage Regulator","Circuit that keeps output voltage constant despite load or supply variations. Examples: Zener shunt regulator and 78xx ICs."]
+]],
+["Bipolar Junction Transistor",[
+["Bipolar Junction Transistor (BJT)","Three-layer (NPN or PNP) device in which a small base current controls a larger collector current. Both electrons and holes take part in conduction."],
+["Emitter, Base and Collector","The emitter is heavily doped and injects carriers; the base is thin and lightly doped; the collector collects them. Doping and size differ, so the terminals are not interchangeable."],
+["Transistor Configurations","CB, CE and CC describe which terminal is common to input and output. CE gives the highest power gain and is the most widely used."],
+["Current Gains α and β","α = I_C/I_E (slightly below 1) and β = I_C/I_B (typically 50–300). They are related by β = α/(1 − α)."],
+["Operating Regions","Cut-off (both junctions reverse biased), active (EB forward, CB reverse) and saturation (both forward). Amplifiers use the active region; switches use cut-off and saturation."],
+["Biasing and Q-point","Setting DC voltages and currents so the transistor works at a chosen quiescent (Q) point. A stable Q-point avoids distortion and thermal drift."],
+["DC Load Line","Straight line on the output characteristics showing all possible DC operating points for a given V_CC and R_C. The Q-point lies on this line."],
+["Transistor as a Switch","Driven between cut-off (OFF) and saturation (ON) by the base signal. This forms the basis of digital logic circuits."],
+["Transistor as an Amplifier","Operates in the active region so that a small input signal produces a larger output signal. Voltage gain depends on collector resistance and transistor parameters."],
+["Thermal Runaway","Self-reinforcing rise in collector current and temperature that can destroy a transistor. Controlled by stable biasing, e.g., an emitter resistor."]
+]],
+["Field Effect Transistors",[
+["Field Effect Transistor (FET)","Voltage-controlled device whose drain current is governed by the electric field at the gate. Only one type of carrier conducts, so it is unipolar."],
+["JFET","FET in which a reverse-biased PN junction gate controls the channel width. It has very high input impedance."],
+["MOSFET","FET whose metal gate is insulated from the channel by an oxide layer, giving extremely high input impedance. It is the basis of modern ICs and processors."],
+["Threshold Voltage (V_th)","Minimum gate-to-source voltage needed to form a conducting channel in an enhancement MOSFET. Below V_th the device is OFF."],
+["CMOS","Complementary pairing of n-channel and p-channel MOSFETs with very low static power consumption. Used in most digital chips."]
+]],
+["Operational Amplifiers",[
+["Operational Amplifier (Op-Amp)","High-gain differential amplifier with high input and low output impedance. Used for amplification, filtering, comparison and signal conditioning."],
+["Ideal Op-Amp","Infinite gain, input impedance, bandwidth and CMRR; zero output impedance and offset. Real op-amps approximate this behaviour."],
+["Virtual Short","With negative feedback, the inverting and non-inverting inputs sit at nearly the same voltage. This simplifies analysis of op-amp circuits."],
+["Inverting Amplifier","Gain = −R_f/R_in, with a 180° phase shift between input and output. The input is applied to the inverting terminal through R_in."],
+["Non-Inverting Amplifier","Gain = 1 + R_f/R₁, with the output in phase with the input. It offers very high input impedance."],
+["Voltage Follower (Buffer)","Non-inverting amplifier with unity gain and the output tied to the inverting input. It isolates a source from a load."],
+["Summing Amplifier","Inverting configuration with several input resistors, giving an output proportional to the (negative) sum of the inputs. Used in audio mixers and DACs."],
+["Comparator","Op-amp used without feedback to compare two voltages and swing the output to a positive or negative saturation level. Used for zero-crossing and threshold detection."],
+["Negative Feedback","Feeding part of the output back to oppose the input. It stabilises gain, reduces distortion and widens bandwidth."],
+["CMRR","Common Mode Rejection Ratio: the ability of a differential amplifier to reject signals common to both inputs, expressed in dB. Higher is better."],
+["Slew Rate","Maximum rate of change of an op-amp's output voltage, in V/µs. It limits how fast large signals can be reproduced."],
+["Oscillator","Circuit that generates a periodic output without an input signal by using positive feedback. Barkhausen criterion: loop gain of at least 1 and loop phase of 0° or 360°."]
+]],
+["Digital Electronics",[
+["Analog and Digital Signals","Analog signals vary continuously; digital signals take discrete levels, usually 0 and 1. Digital signals resist noise better."],
+["Number Systems","Binary (base 2), octal (8), decimal (10) and hexadecimal (16). Computers use binary; hex is a compact way to write it."],
+["Bit, Nibble and Byte","A bit is a single binary digit, a nibble is 4 bits and a byte is 8 bits. A byte can represent 256 distinct values."],
+["Two's Complement","Method of representing negative binary numbers: invert the bits and add 1. It lets the same adder circuit perform subtraction."],
+["Logic Gates","Basic digital circuits (AND, OR, NOT, NAND, NOR, XOR, XNOR) that produce outputs according to Boolean rules. They are the building blocks of digital systems."],
+["Universal Gates","NAND and NOR gates, each of which can implement any Boolean function. Hence they are widely used in IC design."],
+["Boolean Algebra","Algebra of variables that take only the values 0 or 1, using AND, OR and NOT. Used to simplify logic circuits."],
+["De Morgan's Theorems","(A·B)' = A' + B' and (A + B)' = A'·B'. They convert between AND and OR forms using inversion."],
+["Truth Table","Table listing the output for every possible combination of inputs. It fully defines a combinational circuit."],
+["Half and Full Adder","A half adder adds two bits (sum, carry); a full adder also includes a carry-in. Cascading full adders builds multi-bit adders."],
+["Multiplexer","Combinational circuit that selects one of many inputs and routes it to a single output using select lines. A 2ⁿ:1 MUX needs n select lines."],
+["Flip-Flop","Edge-triggered one-bit memory element with two stable states. Common types: SR, JK, D and T."],
+["ADC and DAC","An ADC converts analog signals to digital codes; a DAC does the reverse. They link real-world sensors with digital processors."]
+]],
+["Instruments & Systems",[
+["Multimeter","Instrument that measures voltage, current and resistance, and often tests diodes and continuity. Connect an ammeter in series and a voltmeter in parallel."],
+["Cathode Ray Oscilloscope (CRO)","Instrument that displays voltage waveforms against time. Used to measure amplitude, frequency and phase."],
+["Sensor and Transducer","A sensor detects a physical quantity; a transducer converts it from one energy form to another, commonly to an electrical signal. Examples: thermistor, LDR, strain gauge."],
+["Modulation","Process of varying a carrier's amplitude, frequency or phase in accordance with the message signal. It enables efficient transmission, e.g., AM and FM."],
+["Bandwidth","Range of frequencies a circuit or channel can pass effectively, usually between the −3 dB points. Wider bandwidth means more data capacity."],
+["Decibel (dB)","Logarithmic unit for ratios: gain (dB) = 20 log₁₀(V_out/V_in) for voltages. A 3 dB drop corresponds to half power."],
+["Integrated Circuit (IC)","Many components fabricated on a single semiconductor chip. It reduces size, cost and power while improving reliability."]
+]]
+],
+"Applied Mechanics": [
+["Fundamentals",[
+["Engineering Mechanics","Branch of science dealing with the effect of forces on bodies at rest or in motion. It divides into statics and dynamics."],
+["Statics","Study of bodies at rest or moving with constant velocity under balanced forces. Net force and net moment are zero."],
+["Dynamics","Study of bodies in motion under the action of forces. It is divided into kinematics and kinetics."],
+["Kinematics and Kinetics","Kinematics describes motion (displacement, velocity, acceleration) without considering its cause. Kinetics relates the motion to the forces causing it."],
+["Particle and Rigid Body","A particle has mass but negligible size; a rigid body does not deform under load. These idealisations simplify analysis."],
+["Scalar and Vector","A scalar has magnitude only (mass, time); a vector has magnitude and direction (force, velocity). Vectors add by the parallelogram law."],
+["Force","Push or pull that changes, or tends to change, a body's state of rest or motion, measured in newtons (N). It is a vector with magnitude, direction and point of application."],
+["Newton's First Law","A body stays at rest or in uniform motion unless acted on by an external net force. Also called the law of inertia."],
+["Newton's Second Law","Net force equals the rate of change of momentum; for constant mass, F = ma. Acceleration is in the direction of the net force."],
+["Newton's Third Law","For every action there is an equal and opposite reaction. Action and reaction act on different bodies."],
+["Mass and Weight","Mass is the quantity of matter (kg) and is constant; weight W = mg is the gravitational force (N) and varies with location. g ≈ 9.81 m/s² on Earth."],
+["Principle of Transmissibility","The external effect of a force on a rigid body is unchanged if the force is moved along its line of action. Valid for rigid bodies only, not for internal stresses."],
+["Free Body Diagram (FBD)","Sketch of a body isolated from its surroundings showing all forces and moments acting on it. It is the first step in solving any mechanics problem."]
+]],
+["Force Systems & Equilibrium",[
+["Resultant","Single force (and/or couple) that produces the same effect as a system of forces. Found by vector addition."],
+["Parallelogram Law","Two concurrent forces are represented by adjacent sides of a parallelogram; their resultant is the diagonal. R = √(P² + Q² + 2PQ cosθ)."],
+["Triangle and Polygon Law","Place force vectors head to tail; the closing side gives the resultant. The polygon law extends this to many forces."],
+["Resolution of a Force","Splitting a force into components, usually perpendicular, e.g., F_x = F cosθ and F_y = F sinθ. It simplifies the summation of forces."],
+["Coplanar, Concurrent and Parallel Forces","Coplanar forces lie in one plane; concurrent forces meet at a point; parallel forces have parallel lines of action. Classifying the system guides the method of solution."],
+["Moment of a Force","Turning effect of a force about a point or axis, M = F × d, in N·m. Its direction follows the right-hand rule."],
+["Varignon's Theorem","The moment of a resultant about a point equals the algebraic sum of the moments of its components about that point. It simplifies moment calculations."],
+["Couple","Pair of equal, opposite, parallel forces with different lines of action, producing pure rotation. Its moment is the same about every point."],
+["Force–Couple System","A force at one point can be replaced by the same force at another point plus a couple. Used to reduce general force systems."],
+["Lami's Theorem","For three concurrent forces in equilibrium, each force is proportional to the sine of the angle between the other two. P/sinα = Q/sinβ = R/sinγ."],
+["Equilibrium","State in which the resultant force and resultant moment on a body are zero. For coplanar forces: ΣFx = 0, ΣFy = 0, ΣM = 0."],
+["Supports and Reactions","A roller gives one normal reaction, a hinge (pin) gives two components, and a fixed support gives two forces and a moment. Reactions keep the body in equilibrium."],
+["Types of Loads","Point (concentrated) load, uniformly distributed load (UDL) and uniformly varying load (UVL). A distributed load acts through the centroid of its load diagram."],
+["Types of Beams","Simply supported, cantilever, overhanging, fixed and continuous beams, classified by support conditions. Reactions of statically determinate beams follow from equilibrium alone."],
+["Shear Force and Bending Moment","Shear force is the algebraic sum of vertical forces to one side of a section; bending moment is the sum of their moments. SFD and BMD plot them along the beam."]
+]],
+["Friction",[
+["Friction","Resisting force at contact surfaces that opposes relative or impending motion. It acts along the surface, opposite to the motion."],
+["Static, Limiting and Kinetic Friction","Static friction adjusts to the applied force up to a maximum value, the limiting friction. Once sliding starts, the lower kinetic friction acts."],
+["Coefficient of Friction","Ratio of limiting friction to normal reaction, μ = F/N. It depends on the materials in contact and their roughness."],
+["Laws of Dry Friction","Friction opposes motion, is proportional to the normal reaction, and is independent of contact area and (approximately) of speed. Kinetic friction is slightly less than static."],
+["Angle of Friction","Angle between the normal reaction and the resultant of normal reaction and limiting friction; tan φ = μ. It indicates how rough a surface is."],
+["Angle of Repose","Maximum inclination of a plane at which a body just remains at rest under its own weight. It equals the angle of friction."],
+["Cone of Friction","Cone with its axis along the normal and semi-angle equal to the angle of friction. Any reaction inside the cone keeps the body in equilibrium."],
+["Ladder Friction","Equilibrium of a ladder resting against a wall and the floor, with friction at one or both. Solved using ΣFx, ΣFy and ΣM = 0 at the limiting condition."],
+["Wedge","Simple machine that lifts or moves loads by sliding under them, using friction at its faces. Often self-locking when the wedge angle is small."],
+["Belt Friction","Friction between a flexible belt and a pulley: T₁/T₂ = e^(μθ). Here θ is the angle of wrap in radians."],
+["Screw Jack","Inclined plane wound around a cylinder to lift loads with a small effort. It is self-locking if the helix angle is less than the angle of friction."]
+]],
+["Trusses",[
+["Truss","Structure made of straight members connected at joints to form triangles, carrying loads at the joints. Members carry only axial tension or compression."],
+["Perfect Truss","Truss with exactly enough members to be rigid: m = 2j − 3. Fewer members make it a mechanism; more make it redundant."],
+["Method of Joints","Apply equilibrium (ΣFx = 0, ΣFy = 0) to each joint to find member forces. Start from a joint with at most two unknowns."],
+["Method of Sections","Cut the truss through up to three members and apply equilibrium to one part. Efficient for finding forces in selected members."],
+["Zero-Force Member","Member that carries no load under a given loading, found by inspecting joints. It is still needed for stability and for other loadings."],
+["Tension and Compression","Tension pulls on a member (elongation); compression pushes on it (shortening). A force arrow pointing away from a joint indicates tension."]
+]],
+["Centroid & Moment of Inertia",[
+["Centroid","Geometric centre of an area, line or volume. For a uniform body it coincides with the centre of gravity."],
+["Centre of Gravity","Point through which the entire weight of a body acts. It depends on the weight distribution."],
+["Centre of Mass","Point where the entire mass may be assumed concentrated for translational motion. It coincides with the centre of gravity in a uniform field."],
+["Composite Area","Shape built from simple shapes. Its centroid is x̄ = ΣAx/ΣA and ȳ = ΣAy/ΣA; holes are treated as negative areas."],
+["Pappus–Guldinus Theorems","Surface area of revolution = length of generating curve × distance moved by its centroid. Volume of revolution = area × distance moved by its centroid."],
+["Moment of Inertia (Area)","Second moment of area about an axis, I = ∫y² dA, in m⁴. It measures the resistance of a section to bending."],
+["Radius of Gyration","Distance from an axis at which the whole area (or mass) could be concentrated to give the same moment of inertia: k = √(I/A). Used in column and rotation analysis."],
+["Parallel Axis Theorem","I = I_G + Ad², where d is the distance between the parallel axes. It shifts the MOI from the centroidal axis to another axis."],
+["Perpendicular Axis Theorem","For a plane lamina, I_z = I_x + I_y. It applies only to plane areas."],
+["Polar Moment of Inertia","Second moment of area about an axis perpendicular to the plane, J = I_x + I_y. Relevant to the torsion of shafts."],
+["Mass Moment of Inertia","Measure of a body's resistance to angular acceleration, I = ∫r² dm, in kg·m². It plays the role of mass in rotational motion."]
+]],
+["Kinematics of Particles",[
+["Distance and Displacement","Distance is the total path length (scalar); displacement is the straight-line change in position (vector). They are equal only for straight-line motion in one direction."],
+["Speed and Velocity","Speed is the rate of change of distance; velocity is the rate of change of displacement, with direction. Instantaneous velocity is v = ds/dt."],
+["Acceleration","Rate of change of velocity, a = dv/dt, in m/s². It can be positive (speeding up) or negative (retardation)."],
+["Equations of Uniformly Accelerated Motion","v = u + at, s = ut + ½at², v² = u² + 2as. Valid only for constant acceleration along a straight line."],
+["Motion under Gravity","Free fall or vertical projection with constant acceleration g = 9.81 m/s² downward. Air resistance is neglected."],
+["Variable Acceleration","When a depends on time or position, integrate a = dv/dt and v = ds/dt, or use a = v dv/ds. Constants follow from the initial conditions."],
+["Motion (Kinematic) Curves","Graphs of s–t, v–t and a–t. The slope of s–t gives velocity, the slope of v–t gives acceleration, and the area under v–t gives displacement."],
+["Projectile Motion","Motion of a body launched at an angle and acted on by gravity alone, with constant horizontal velocity. Its path is a parabola."],
+["Range, Time of Flight and Maximum Height","On level ground: T = 2u sinθ/g, R = u² sin2θ/g, H = u² sin²θ/2g. Range is maximum at θ = 45°."],
+["Relative Velocity","Velocity of one body as observed from another, v_A/B = v_A − v_B. Used in river–boat and aircraft–wind problems."],
+["Curvilinear Motion","Motion along a curved path, analysed in rectangular, normal–tangential or polar components. Acceleration has both tangential and normal parts."],
+["Normal and Tangential Acceleration","Tangential a_t = dv/dt changes speed; normal a_n = v²/r changes direction. The normal component points toward the centre of curvature."],
+["Centripetal Force","Net inward force required to keep a body in circular motion, F = mv²/r. It is not a new force but the resultant of real forces."]
+]],
+["Kinematics of Rigid Bodies",[
+["Translation and Rotation","In translation every point has the same displacement; in rotation points move in circles about an axis. General plane motion combines both."],
+["Angular Displacement, Velocity and Acceleration","θ (rad), ω = dθ/dt and α = dω/dt. Linear quantities relate by s = rθ, v = rω and a_t = rα."],
+["Instantaneous Centre of Rotation","Point with zero velocity at a given instant in plane motion, about which the body appears to rotate. The velocity of any point is ω × its distance from it."],
+["Rolling Without Slipping","Condition where the contact point has zero velocity, v = rω. Static friction acts without dissipating energy."]
+]],
+["Kinetics: Momentum, Work & Energy",[
+["Linear Momentum","Product of mass and velocity, p = mv, a vector. Net force equals its rate of change."],
+["Impulse","Product of force and time of action, ∫F dt, equal to the change in momentum. Useful for forces acting for short durations."],
+["Impulse–Momentum Principle","Impulse of the net force equals the change in momentum: Ft = mv − mu. It handles impact and variable forces."],
+["Conservation of Momentum","With no external force, the total momentum of a system remains constant. Applies to collisions and explosions."],
+["Collision (Impact)","Short interaction between bodies producing large internal forces. It may be elastic or inelastic; momentum is conserved in both."],
+["Coefficient of Restitution","Ratio of the relative speed of separation to that of approach, e = (v₂ − v₁)/(u₁ − u₂). It is 1 for perfectly elastic and 0 for perfectly plastic impact."],
+["D'Alembert's Principle","Adding an inertia force (−ma) turns a dynamic problem into an equivalent static one. It allows equilibrium equations to be used in dynamics."],
+["Work","Product of force and displacement in its direction, W = F·s cosθ, in joules (J). Zero if the force is perpendicular to the motion."],
+["Power","Rate of doing work, P = dW/dt = F·v, in watts (W). 1 hp ≈ 746 W."],
+["Kinetic and Potential Energy","Kinetic energy = ½mv² (due to motion); gravitational potential energy = mgh (due to position). Elastic potential energy = ½kx²."],
+["Work–Energy Theorem","Net work done on a body equals its change in kinetic energy. Convenient when time is not required."],
+["Conservation of Energy","Total mechanical energy of a system remains constant if only conservative forces act. Friction converts it into heat."],
+["Efficiency","Ratio of useful output work (or power) to input, η = output/input. It is always less than 1 for real machines."],
+["Simple Harmonic Motion","Oscillation with a restoring force proportional to displacement, a = −ω²x. The time period is T = 2π√(m/k) for a spring–mass system."]
+]],
+["Introductory Strength of Materials",[
+["Stress","Internal resisting force per unit area, σ = P/A, in Pa (N/m²). It may be tensile, compressive or shear."],
+["Strain","Deformation per unit original length, a dimensionless ratio. Normal strain = ΔL/L."],
+["Hooke's Law","Within the elastic limit, stress is proportional to strain, σ = Eε. The slope of the linear region is Young's modulus."],
+["Young's Modulus (E)","Ratio of tensile stress to tensile strain in the elastic range. It measures stiffness, about 200 GPa for steel."],
+["Poisson's Ratio","Ratio of lateral strain to longitudinal strain in magnitude. Typical values are 0.25–0.35 for metals."],
+["Factor of Safety","Ratio of ultimate (or yield) stress to permissible (working) stress. It provides a margin against uncertainties."]
+]]
+]
+};
+
+/* ---------- APP ---------- */
+(function(){
+'use strict';
+var KEY='fe-glossary-custom-v1';
+var SUBJ=Object.keys(DATA);
+var $=function(s){return document.querySelector(s)};
+
+var base=[],n=0;
+SUBJ.forEach(function(s){DATA[s].forEach(function(g){g[1].forEach(function(p){
+  base.push({id:'b'+(n++),subject:s,topic:g[0],term:p[0],def:p[1],custom:false});
+});});});
+
+var custom=[];
+try{custom=JSON.parse(localStorage.getItem(KEY)||'[]');}catch(e){custom=[];}
+if(!Array.isArray(custom))custom=[];
+function save(){try{localStorage.setItem(KEY,JSON.stringify(custom));}catch(e){}}
+function all(){return base.concat(custom);}
+
+var st={subject:'All',topic:'All',q:'',letter:'All',sort:'az',study:false,open:{}};
+var editId=null;
+
+function letterOf(t){var m=t.match(/[A-Za-z]/);return m?m[0].toUpperCase():'#';}
+function topicsFor(s){
+  var seen=[],out=[];
+  all().forEach(function(e){if((s==='All'||e.subject===s)&&seen.indexOf(e.topic)<0){seen.push(e.topic);out.push(e.topic);}});
+  return out;
+}
+function matches(e){
+  if(st.subject!=='All'&&e.subject!==st.subject)return false;
+  if(st.topic!=='All'&&e.topic!==st.topic)return false;
+  if(st.q){var h=(e.term+' '+e.def+' '+e.topic).toLowerCase();if(h.indexOf(st.q.toLowerCase())<0)return false;}
+  return true;
+}
+function hl(text){
+  var f=document.createDocumentFragment(),q=st.q;
+  if(!q){f.appendChild(document.createTextNode(text));return f;}
+  var lo=text.toLowerCase(),ql=q.toLowerCase(),i=0,j;
+  while((j=lo.indexOf(ql,i))>-1){
+    if(j>i)f.appendChild(document.createTextNode(text.slice(i,j)));
+    var m=document.createElement('mark');m.textContent=text.slice(j,j+ql.length);f.appendChild(m);
+    i=j+ql.length;
+  }
+  if(i<text.length)f.appendChild(document.createTextNode(text.slice(i)));
+  return f;
+}
+function el(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e;}
+
+function renderTabs(){
+  var box=$('#tabs');box.innerHTML='';
+  ['All'].concat(SUBJ).forEach(function(s){
+    var b=el('button',st.subject===s?'on':'',s==='All'?'All subjects':s);
+    b.onclick=function(){st.subject=s;st.topic='All';st.letter='All';render();};
+    box.appendChild(b);
+  });
+}
+function renderTopics(){
+  var box=$('#topics');box.innerHTML='';
+  if(st.subject==='All'){box.style.display='none';return;}
+  box.style.display='flex';
+  ['All'].concat(topicsFor(st.subject)).forEach(function(t){
+    var b=el('button',st.topic===t?'on':'',t==='All'?'All topics':t);
+    b.onclick=function(){st.topic=t;st.letter='All';render();};
+    box.appendChild(b);
+  });
+}
+function renderLetters(list){
+  var box=$('#letters');box.innerHTML='';
+  var have={};list.forEach(function(e){have[letterOf(e.term)]=1;});
+  var b=el('button',st.letter==='All'?'on':'','All');
+  b.onclick=function(){st.letter='All';render();};box.appendChild(b);
+  'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').forEach(function(L){
+    var x=el('button',st.letter===L?'on':'',L);
+    x.disabled=!have[L];
+    x.onclick=function(){st.letter=L;render();};
+    box.appendChild(x);
+  });
+}
+function card(e){
+  var c=el('article','card'+(st.study?' study':'')+(st.study&&st.open[e.id]?' open':''));
+  c.dataset.s=e.subject;
+  var h=el('h3');h.appendChild(hl(e.term));c.appendChild(h);
+  var bs=el('div','badges');
+  bs.appendChild(el('span','b s',e.subject));
+  bs.appendChild(el('span','b t',e.topic));
+  if(e.custom)bs.appendChild(el('span','b c','custom'));
+  c.appendChild(bs);
+  var p=el('p','def');p.appendChild(hl(e.def));c.appendChild(p);
+  if(e.custom){
+    var a=el('div','act');
+    var eb=el('button','','Edit'),db=el('button','','Delete');
+    eb.onclick=function(ev){ev.stopPropagation();openDlg(e.id);};
+    db.onclick=function(ev){ev.stopPropagation();
+      if(confirm('Delete "'+e.term+'"?')){custom=custom.filter(function(x){return x.id!==e.id;});save();render();toast('Deleted');}
+    };
+    a.appendChild(eb);a.appendChild(db);c.appendChild(a);
+  }
+  if(st.study){c.onclick=function(){st.open[e.id]=!st.open[e.id];c.classList.toggle('open');};}
+  return c;
+}
+function render(){
+  renderTabs();renderTopics();
+  var pre=all().filter(matches);
+  renderLetters(pre);
+  if(st.letter!=='All'&&!pre.some(function(e){return letterOf(e.term)===st.letter;}))st.letter='All';
+  var list=pre.filter(function(e){return st.letter==='All'||letterOf(e.term)===st.letter;});
+  if(st.sort==='az')list.sort(function(a,b){return a.term.localeCompare(b.term,'en',{sensitivity:'base'});});
+  var total=all().length;
+  $('#stats').textContent='Showing '+list.length+' of '+total+' concepts ('+
+    SUBJ.map(function(s){return all().filter(function(e){return e.subject===s;}).length+' '+s;}).join(' · ')+')';
+  var main=$('#list');main.innerHTML='';
+  if(!list.length){main.appendChild(el('div','empty','No concepts match. Try a different search, or add this concept yourself.'));return;}
+  var grid=null,lastKey=null;
+  list.forEach(function(e){
+    var key=st.sort==='az'?letterOf(e.term):e.subject+' › '+e.topic;
+    if(key!==lastKey){
+      main.appendChild(el('h2','grp',key));
+      grid=el('div','grid');main.appendChild(grid);lastKey=key;
+    }
+    grid.appendChild(card(e));
+  });
+}
+
+/* ---------- dialog ---------- */
+var dlg=$('#dlg');
+function fillTopicList(){
+  var dl=$('#topicList');dl.innerHTML='';
+  topicsFor($('#fSubject').value).forEach(function(t){var o=document.createElement('option');o.value=t;dl.appendChild(o);});
+}
+function openDlg(id){
+  editId=id||null;
+  var fs=$('#fSubject');fs.innerHTML='';
+  SUBJ.forEach(function(s){var o=document.createElement('option');o.value=s;o.textContent=s;fs.appendChild(o);});
+  var e=id?custom.filter(function(x){return x.id===id;})[0]:null;
+  $('#dlgTitle').textContent=e?'Edit concept':'Add concept';
+  fs.value=e?e.subject:(st.subject!=='All'?st.subject:SUBJ[0]);
+  $('#fTopic').value=e?e.topic:(st.topic!=='All'?st.topic:'');
+  $('#fTerm').value=e?e.term:'';
+  $('#fDef').value=e?e.def:'';
+  $('#cnt').textContent=$('#fDef').value.length;
+  $('#err').textContent='';
+  fillTopicList();
+  dlg.showModal();
+}
+$('#fSubject').onchange=fillTopicList;
+$('#fDef').oninput=function(){$('#cnt').textContent=this.value.length;};
+$('#cancel').onclick=function(){dlg.close();};
+$('#form').onsubmit=function(ev){
+  ev.preventDefault();
+  var s=$('#fSubject').value,t=$('#fTopic').value.trim()||'General',
+      term=$('#fTerm').value.trim(),def=$('#fDef').value.trim();
+  if(!term||!def){$('#err').textContent='Concept and explanation are required.';return;}
+  var dup=all().some(function(x){return x.subject===s&&x.term.toLowerCase()===term.toLowerCase()&&x.id!==editId;});
+  if(dup){$('#err').textContent='This concept already exists in '+s+'.';return;}
+  if(editId){
+    custom.forEach(function(x){if(x.id===editId){x.subject=s;x.topic=t;x.term=term;x.def=def;}});
+  }else{
+    custom.push({id:'c'+Date.now()+Math.floor(Math.random()*1000),subject:s,topic:t,term:term,def:def,custom:true});
+  }
+  save();dlg.close();render();toast(editId?'Updated':'Added');
+};
+
+/* ---------- export / import / misc ---------- */
+function download(name,text,type){
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([text],{type:type}));
+  a.download=name;document.body.appendChild(a);a.click();
+  setTimeout(function(){URL.revokeObjectURL(a.href);a.remove();},500);
+}
+$('#expJson').onclick=function(){
+  download('engineering-glossary.json',JSON.stringify(all().map(function(e){
+    return {subject:e.subject,topic:e.topic,term:e.term,definition:e.def};
+  }),null,2),'application/json');
+};
+$('#expCsv').onclick=function(){
+  var q=function(v){return '"'+String(v).replace(/"/g,'""')+'"';};
+  var rows=['Subject,Topic,Concept,Explanation'].concat(all().map(function(e){
+    return [e.subject,e.topic,e.term,e.def].map(q).join(',');
+  }));
+  download('engineering-glossary.csv','\ufeff'+rows.join('\r\n'),'text/csv');
+};
+$('#imp').onclick=function(){$('#file').click();};
+$('#file').onchange=function(){
+  var f=this.files[0];if(!f)return;
+  var r=new FileReader();
+  r.onload=function(){
+    try{
+      var arr=JSON.parse(r.result);if(!Array.isArray(arr))throw 0;
+      var added=0;
+      arr.forEach(function(o,i){
+        var s=o&&o.subject,term=o&&String(o.term||'').trim(),def=o&&String(o.definition||o.def||'').trim();
+        if(SUBJ.indexOf(s)<0||!term||!def)return;
+        var dup=all().some(function(x){return x.subject===s&&x.term.toLowerCase()===term.toLowerCase();});
+        if(dup)return;
+        custom.push({id:'c'+Date.now()+'_'+i,subject:s,topic:String(o.topic||'General').trim()||'General',term:term,def:def,custom:true});
+        added++;
+      });
+      save();render();toast(added+' concept(s) imported');
+    }catch(e){toast('Invalid JSON file');}
+  };
+  r.readAsText(f);this.value='';
+};
+$('#prn').onclick=function(){window.print();};
+$('#add').onclick=function(){openDlg();};
+$('#q').oninput=function(){st.q=this.value.trim();st.letter='All';render();};
+$('#sort').onchange=function(){st.sort=this.value;render();};
+$('#study').onchange=function(){st.study=this.checked;st.open={};render();};
+document.addEventListener('keydown',function(e){
+  if(e.key==='/'&&document.activeElement.tagName!=='INPUT'&&document.activeElement.tagName!=='TEXTAREA'&&!dlg.open){
+    e.preventDefault();$('#q').focus();
+  }
+});
+var tt;
+function toast(m){var t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(tt);tt=setTimeout(function(){t.classList.remove('show');},1800);}
+
+render();
+})();
+</script>
+</body>
+</html>
